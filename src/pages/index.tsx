@@ -5,17 +5,19 @@ import ImageWrapper from '../components/ImageWrapper';
 import SideMenu from '@/components/SideMenu';
 import { useState } from 'react';
 import Pin from '@/components/Pin';
+import PinBox from '@/components/PinBox';
 
 const data = {name:"Nome", color:"", pinList: [
-  {title:"Pin1", text: "Lorem ipsum dolor at a met 1", posX: 30, posY: 30},
-  {title:"Pin2", text: "Lorem ipsum dolor at a met 2", posX: 20, posY: 20},
-  {title:"Pin1", text: "Lorem ipsum dolor at a met 1", posX: 50, posY: 50},
-  {title:"Pin2", text: "Lorem ipsum dolor at a met 2", posX: 60, posY: 60},
+  {title:"Pin1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1", text: "Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 ", posX: 30, posY: 30},
+  {title:"Pin2", text: "Lorem ipsum dolor at a met 2 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor ", posX: 20, posY: 20},
+  {title:"Pin1", text: "Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor ", posX: 50, posY: 50},
+  {title:"Pin2", text: "Lorem ipsum dolor at a met 2 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor at a met 1 Lorem ipsum dolor ", posX: 60, posY: 60},
 ]}
 
 export default function Home() {
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selected, setSelected] = useState<number | null>(null);
 
   return (
     <>
@@ -29,7 +31,9 @@ export default function Home() {
         <ImageWrapper shrink={menuOpen} >
           {
              data.pinList.map((pin, index) => (
-              <Pin key={index} number={index + 1} posY={pin.posY} posX={pin.posX} color="#144ea5" />
+              <Pin key={index} number={index + 1} posY={pin.posY} posX={pin.posX} color="#144ea5" handler={ () => selected != index ? setSelected(index) : setSelected(null) }>
+                <PinBox active={ selected == index ? true: false} title={pin.title} text={pin.text} posX={pin.posX} posY={pin.posY} handler={ () => setSelected(null) } />
+              </Pin>
              ))
           }
         </ImageWrapper>

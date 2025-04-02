@@ -1,23 +1,23 @@
-import Image from 'next/image'
-import { ReactNode, useRef, useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components'
 
 interface PinProps {
     number: number;
     color: string;
-    title?: string;
-    text?: string;
     posY: number;
     posX: number;
+    children?: ReactNode;
+    handler?: any;
 }
 
-const Pin: React.FC<PinProps> = ({ number, color, title, text, posY, posX }) => {
+const Pin: React.FC<PinProps> = ({ number, color, posY, posX, handler, children }) => {
 
     return (
-        <PinWrapperST $top={posY} $left={posX} >
+        <PinWrapperST $top={posY} $left={posX} onClick={handler} >
             <PinST $color={color} >
                 {number}
             </PinST>
+            {children}
         </PinWrapperST>
     )
 }
